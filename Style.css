@@ -18,7 +18,7 @@ body {
   max-width: 960px;
   margin: auto;
   background: white;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -73,7 +73,7 @@ header p {
   display: inline-block;
   padding: 10px 20px;
   border-radius: 25px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* Galerie */
@@ -90,7 +90,7 @@ header p {
   width: 90%;
   max-width: 800px;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
@@ -98,7 +98,7 @@ header p {
   transform: scale(1.02);
 }
 
-/* Bouton Airbnb */
+/* Appel à l'action */
 .cta {
   text-align: center;
   padding: 30px 0;
@@ -113,7 +113,7 @@ header p {
   font-size: 1.1rem;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease;
 }
 
@@ -129,4 +129,32 @@ footer {
   font-size: 0.95rem;
   color: #5a3e36;
   border-top: 1px solid #e2c2b3;
+}
+
+/* Responsive – Améliorations */
+
+@media (min-width: 768px) {
+  .gallery {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .gallery img {
+    width: 45%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .description,
+  .gallery,
+  .cta {
+    padding: 20px 10px;
+  }
+
+  .airbnb-button {
+    width: 90%;
+    display: inline-block;
+  }
 }
