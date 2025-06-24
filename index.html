@@ -11,22 +11,30 @@
 <body>
   <div class="container">
     <header>
-      <h1>Bienvenue</h1>
-      <p>Installez-vous et laissez-vous séduire par le charme de ce lieu.</p>
+      <button id="lang-toggle">🇬🇧 English</button>
+      <h1>
+        <span class="fr">Bienvenue</span>
+        <span class="en" style="display: none;">Welcome</span>
+      </h1>
+      <p>
+        <span class="fr">Installez-vous et laissez-vous séduire par le charme de ce lieu.</span>
+        <span class="en" style="display: none;">Make yourself at home and let yourself be charmed by this lovely place.</span>
+      </p>
     </header>
 
     <section class="description">
-      <h2>Description & Tarifs</h2>
+      <h2>
+        <span class="fr">Description & Tarifs</span>
+        <span class="en" style="display: none;">Description & Prices</span>
+      </h2>
       <p>
-        Ce charmant appartement est idéal pour les couples ou les voyageurs en solo.
-        Il dispose d’un salon lumineux, d’un lit confortable, d’une cuisine entièrement équipée
-        et d’une salle de bain moderne.
+        <span class="fr">Ce charmant appartement est idéal pour les couples ou les voyageurs en solo. Il dispose d’un salon lumineux, d’un lit confortable, d’une cuisine entièrement équipée et d’une salle de bain moderne.</span>
+        <span class="en" style="display: none;">This charming apartment is ideal for couples or solo travelers. It offers a bright living room, a comfortable bed, a fully equipped kitchen, and a modern bathroom.</span>
       </p>
-      <p>
-        🛏️ 1 chambre • 🧼 1 salle de bain • 🍽️ Cuisine • 📶 Wi-Fi gratuit
-      </p>
+      <p>🛏️ 1 chambre • 🧼 1 salle de bain • 🍽️ Cuisine • 📶 Wi-Fi gratuit</p>
       <p class="prix">
-        À partir de <strong>75€/nuit</strong> – Tarif dégressif pour les longs séjours.
+        <span class="fr">À partir de <strong>75€/nuit</strong> – Tarif dégressif pour les longs séjours.</span>
+        <span class="en" style="display: none;">From <strong>€75/night</strong> – Discount for long stays.</span>
       </p>
     </section>
 
@@ -34,46 +42,70 @@
       <section class="gallery">
         <!-- Toutes les images doivent avoir la classe lightbox-link -->
         <div class="gallery-block">
-          <h3>Première chambre</h3>
+          <h3>
+            <span class="fr">Première chambre</span>
+            <span class="en" style="display: none;">First bedroom</span>
+          </h3>
           <a href="chambre_blanche1.JPG" class="lightbox-link"><img src="chambre_blanche1.JPG" alt="Photo chambre blanche" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Deuxième chambre</h3>
+          <h3>
+            <span class="fr">Deuxième chambre</span>
+            <span class="en" style="display: none;">Second bedroom</span>
+          </h3>
           <a href="chambre_orange1.jpg" class="lightbox-link"><img src="chambre_orange1.jpg" alt="Photo chambre orange" loading="lazy"></a>
           <a href="chambre_orange3.jpg" class="lightbox-link"><img src="chambre_orange3.jpg" alt="Photo chambre orange" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Troisième chambre</h3>
+          <h3>
+            <span class="fr">Troisième chambre</span>
+            <span class="en" style="display: none;">Third bedroom</span>
+          </h3>
           <a href="chambre_vieux_lit2.jpg" class="lightbox-link"><img src="chambre_vieux_lit2.jpg" alt="Photo chambre numéro 3 - vue 1" loading="lazy"></a>
           <a href="chambre_vieux_lit3.jpg" class="lightbox-link"><img src="chambre_vieux_lit3.jpg" alt="Photo chambre numéro 3 - vue 2" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Quatrième chambre</h3>
+          <h3>
+            <span class="fr">Quatrième chambre</span>
+            <span class="en" style="display: none;">Fourth bedroom</span>
+          </h3>
           <a href="chambre_violette_lit_orange.JPG" class="lightbox-link"><img src="chambre_violette_lit_orange.JPG" alt="Photo chambre voilet lit orange" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Cinquième chambre</h3>
+          <h3>
+            <span class="fr">Cinquième chambre</span>
+            <span class="en" style="display: none;">Fifth bedroom</span>
+          </h3>
           <a href="chambre_violette1.JPG" class="lightbox-link"><img src="chambre_violette1.JPG" alt="Photo chambre violette" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Dortoir</h3>
+          <h3>
+            <span class="fr">Dortoir</span>
+            <span class="en" style="display: none;">Dormitory</span>
+          </h3>
           <a href="dortoir_1.jpg" class="lightbox-link"><img src="dortoir_1.jpg" alt="Photo Dortoir" loading="lazy"></a>
           <a href="dortoir2.jpg" class="lightbox-link"><img src="dortoir2.jpg" alt="Photo Dortoir" loading="lazy"></a>
           <a href="dortoir3.JPG" class="lightbox-link"><img src="dortoir3.JPG" alt="Photo Dortoir" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Couloir de l'étage</h3>
+          <h3>
+            <span class="fr">Couloir de l'étage</span>
+            <span class="en" style="display: none;">Floor corridor</span>
+          </h3>
           <a href="couloir_etage.JPG" class="lightbox-link"><img src="couloir_etage.JPG" alt="Photo couloir de l'étage" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Cuisine</h3>
+          <h3>
+            <span class="fr">Cuisine</span>
+            <span class="en" style="display: none;">Kitchen</span>
+          </h3>
           <a href="cuisine1.jpg" class="lightbox-link"><img src="cuisine1.jpg" alt="Photo cuisine" loading="lazy"></a>
           <a href="cuisne2.jpg" class="lightbox-link"><img src="cuisne2.jpg" alt="Photo cuisine" loading="lazy"></a>
           <a href="cuisine3.jpg" class="lightbox-link"><img src="cuisine3.jpg" alt="Photo cuisine" loading="lazy"></a>
@@ -82,7 +114,10 @@
         </div>
 
         <div class="gallery-block">
-          <h3>Salle à manger</h3>
+          <h3>
+            <span class="fr">Salle à manger</span>
+            <span class="en" style="display: none;">Dining room</span>
+          </h3>
           <a href="salle_a_manger.jpg" class="lightbox-link"><img src="salle_a_manger.jpg" alt="Photo de la salle à manger" loading="lazy"></a>
           <a href="salle_a_manger1.jpg" class="lightbox-link"><img src="salle_a_manger1.jpg" alt="Photo de la salle à manger" loading="lazy"></a>
           <a href="salle_a_manger2.jpg" class="lightbox-link"><img src="salle_a_manger2.jpg" alt="Photo de la salle à manger" loading="lazy"></a>
@@ -90,7 +125,10 @@
         </div>
 
         <div class="gallery-block">
-          <h3>Salon</h3>
+          <h3>
+            <span class="fr">Salon</span>
+            <span class="en" style="display: none;">Living room</span>
+          </h3>
           <a href="salon1.jpg" class="lightbox-link"><img src="salon1.jpg" alt="Photo du salon" loading="lazy"></a>
           <a href="salon2.jpg" class="lightbox-link"><img src="salon2.jpg" alt="Photo du salon" loading="lazy"></a>
           <a href="salon3.jpg" class="lightbox-link"><img src="salon3.jpg" alt="Photo du salon" loading="lazy"></a>
@@ -99,13 +137,19 @@
         </div>
 
         <div class="gallery-block">
-          <h3>Salle de bain du bas</h3>
+          <h3>
+            <span class="fr">Salle de bain du bas</span>
+            <span class="en" style="display: none;">Downstairs bathroom</span>
+          </h3>
           <a href="sbd_bas1.JPG" class="lightbox-link"><img src="sbd_bas1.JPG" alt="Photo salle de bain du bas" loading="lazy"></a>
           <a href="sbd_bas2.jpg" class="lightbox-link"><img src="sbd_bas2.jpg" alt="Photo salle de bain du bas" loading="lazy"></a>
         </div>
 
         <div class="gallery-block">
-          <h3>Jardin</h3>
+          <h3>
+            <span class="fr">Jardin</span>
+            <span class="en" style="display: none;">Garden</span>
+          </h3>
           <a href="jardin1.jpg" class="lightbox-link"><img src="jardin1.jpg" alt="Photo du jardin" loading="lazy"></a>
           <a href="jardin2.jpg" class="lightbox-link"><img src="jardin2.jpg" alt="Photo du jardin" loading="lazy"></a>
           <a href="jardin3.jpg" class="lightbox-link"><img src="jardin3.jpg" alt="Photo du jardin" loading="lazy"></a>
@@ -115,7 +159,10 @@
         </div>
 
         <div class="gallery-block">
-          <h3>Extérieur</h3>
+          <h3>
+            <span class="fr">Extérieur</span>
+            <span class="en" style="display: none;">Outside</span>
+          </h3>
           <a href="exterieur_1.jpg" class="lightbox-link"><img src="exterieur_1.jpg" alt="Photo de l'extérieur" loading="lazy"></a>
           <a href="exterieur2.jpg" class="lightbox-link"><img src="exterieur2.jpg" alt="Photo de l'extérieur" loading="lazy"></a>
           <a href="exterieur3.jpg" class="lightbox-link"><img src="exterieur3.jpg" alt="Photo de l'extérieur" loading="lazy"></a>
@@ -124,88 +171,111 @@
       </section>
 
       <div class="cta">
-        <a href="https://www.airbnb.fr/ton-lien" class="airbnb-button">Voir l'annonce sur Airbnb</a>
+        <a href="https://www.airbnb.fr/ton-lien" class="airbnb-button">
+          <span class="fr">Voir l'annonce sur Airbnb</span>
+          <span class="en" style="display: none;">View listing on Airbnb</span>
+        </a>
       </div>
     </main>
 
     <footer>
-      <p>&copy; 2025 Mon logement – Merci pour votre visite ❤️</p>
-      <p>Tout droits réservés</p>
+      <p>
+        <span class="fr">&copy; 2025 Mon logement – Merci pour votre visite ❤️</span>
+        <span class="en" style="display: none;">&copy; 2025 My Home – Thank you for your visit ❤️</span>
+      </p>
+      <p>
+        <span class="fr">Tout droits réservés</span>
+        <span class="en" style="display: none;">All rights reserved</span>
+      </p>
     </footer>
   </div>
 
-  <!-- Lightbox HTML (sans CSS pour l’instant) -->
+  <!-- Lightbox HTML (inchangé) -->
   <div class="lightbox-overlay" id="lightbox">
     <span id="prev">&#10094;</span>
     <img src="" alt="Agrandissement image" id="lightbox-img">
     <span id="next">&#10095;</span>
   </div>
 
- <script>
-  const links = Array.from(document.querySelectorAll('.lightbox-link'));
-  const lightbox = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  const nextBtn = document.getElementById('next');
-  const prevBtn = document.getElementById('prev');
-  let currentIndex = 0;
+  <script>
+    const toggleBtn = document.getElementById('lang-toggle');
+    let currentLang = 'fr';
 
-  function showImage(index) {
-    const link = links[index];
-    img.src = link.href;
-    lightbox.classList.add('active');
-    currentIndex = index;
-  }
+    toggleBtn.addEventListener('click', () => {
+      const frElements = document.querySelectorAll('.fr');
+      const enElements = document.querySelectorAll('.en');
 
-  links.forEach((link, index) => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      showImage(index);
+      if (currentLang === 'fr') {
+        frElements.forEach(el => el.style.display = 'none');
+        enElements.forEach(el => el.style.display = '');
+        toggleBtn.textContent = '🇫🇷 Français';
+        currentLang = 'en';
+      } else {
+        frElements.forEach(el => el.style.display = '');
+        enElements.forEach(el => el.style.display = 'none');
+        toggleBtn.textContent = '🇬🇧 English';
+        currentLang = 'fr';
+      }
     });
-  });
 
-  nextBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Empêche la fermeture de la lightbox
-    currentIndex = (currentIndex + 1) % links.length;
-    showImage(currentIndex);
-  });
+    // Script lightbox inchangé
+    const links = Array.from(document.querySelectorAll('.lightbox-link'));
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const nextBtn = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+    let currentIndex = 0;
 
-  prevBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Empêche la fermeture de la lightbox
-    currentIndex = (currentIndex - 1 + links.length) % links.length;
-    showImage(currentIndex);
-  });
+    function showImage(index) {
+      const link = links[index];
+      img.src = link.href;
+      lightbox.classList.add('active');
+      currentIndex = index;
+    }
 
-  lightbox.addEventListener('click', function (e) {
-    // Ne pas fermer si on clique sur l'image OU sur les flèches
-    if (
-      e.target === img ||
-      e.target === nextBtn ||
-      e.target === prevBtn
-    ) return;
-    
-    lightbox.classList.remove('active');
-    img.src = "";
-  });
+    links.forEach((link, index) => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        showImage(index);
+      });
+    });
 
-  document.addEventListener('keydown', function (e) {
-    if (!lightbox.classList.contains('active')) return;
-
-    if (e.key === "ArrowRight") {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       currentIndex = (currentIndex + 1) % links.length;
       showImage(currentIndex);
-    }
+    });
 
-    if (e.key === "ArrowLeft") {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       currentIndex = (currentIndex - 1 + links.length) % links.length;
       showImage(currentIndex);
-    }
+    });
 
-    if (e.key === "Escape") {
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === img || e.target === nextBtn || e.target === prevBtn) return;
       lightbox.classList.remove('active');
       img.src = "";
-    }
-  });
-</script>
+    });
 
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('active')) return;
+
+      if (e.key === "ArrowRight") {
+        currentIndex = (currentIndex + 1) % links.length;
+        showImage(currentIndex);
+      }
+
+      if (e.key === "ArrowLeft") {
+        currentIndex = (currentIndex - 1 + links.length) % links.length;
+        showImage(currentIndex);
+      }
+
+      if (e.key === "Escape") {
+        lightbox.classList.remove('active');
+        img.src = "";
+      }
+    });
+  </script>
 </body>
 </html>
