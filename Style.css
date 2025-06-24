@@ -249,3 +249,35 @@ footer {
   opacity: 0.7;
 }
 
+/* Positionnement du bouton dans le header */
+header {
+  position: relative; /* Permet au bouton d'être positionné par rapport au header */
+  background: linear-gradient(135deg, #eecda3, #ef629f);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* Bouton de changement de langue dans le header */
+#lang-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  color: #c94e4e;
+  border: 2px solid #c94e4e;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+#lang-toggle:hover {
+  background-color: #c94e4e;
+  color: #fff;
+}
+
