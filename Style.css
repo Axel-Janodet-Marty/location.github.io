@@ -136,7 +136,7 @@ header p {
 }
 
 .gallery-block img:hover {
-  transform: scale(1.02);
+  transform: scale(1.06);
 }
 
 /* Appel à l'action */
