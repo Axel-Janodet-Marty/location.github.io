@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="Style.css">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
+<button id="toTop" aria-label="Retour en haut">↑</button>
+
 <body>
   <div class="container">
     <header>
@@ -23,15 +26,58 @@
       </p>
     </header>
 
+    <nav class="quick-nav">
+  <a href="#tarifs">
+    <span class="fr">Tarifs</span>
+    <span class="en" style="display:none;">Prices</span>
+  </a>
+
+  <a href="#logement">
+    <span class="fr">Logement</span>
+    <span class="en" style="display:none;">Accommodation</span>
+  </a>
+
+  <a href="#galerie">
+    <span class="fr">Galerie</span>
+    <span class="en" style="display:none;">Gallery</span>
+  </a>
+
+  <a href="#contact">
+    <span class="fr">Contact</span>
+    <span class="en" style="display:none;">Contact</span>
+  </a>
+</nav>
+
+
+
     <section class="description">
+
       <h2>
-        <span class="fr">Description & Tarifs</span>
-        <span class="en" style="display: none;">Description & Prices</span>
+        <span class="fr">Description</span>
+        <span class="en" style="display: none;">Description</span>
       </h2>
-      <span class="fr">🛏️ 12 couchages (Linge de lit fourni ) + possibilité de 5 couchages supplémentaires • 🧼 2 salles de bains • 🍽️ Cuisine • 📶 Wi-Fi ( fibre )</span>
-      <span class="en" style="display: none;">🛏️ 12 beds (Bed linen provided) + 5 additional beds possible • 🧼 2 bathrooms • 🍽️ Kitchen • 📶 Wi-Fi (fiber)</span>
+      <div class="badges">
+  <span class="badge fr">🛏️ 12 couchages (+5 possible)</span>
+  <span class="badge en" style="display:none;">🛏️ 12 beds (+5 extra possible)</span>
+
+  <span class="badge fr">🧼 2 salles de bains</span>
+  <span class="badge en" style="display:none;">🧼 2 bathrooms</span>
+
+  <span class="badge fr">📶 Wi-Fi fibre</span>
+  <span class="badge en" style="display:none;">📶 Fiber Wi-Fi</span>
+
+  <span class="badge fr">🍽️ Cuisine équipée</span>
+  <span class="badge en" style="display:none;">🍽️ Fully equipped kitchen</span>
+</div>
+
+
       <p></p>
-      <p class="prix">
+      <p></p>
+      <h2>
+        <span class="fr">Prix</span>
+        <span class="en" style="display: none;">Prices</span>
+      </h2>
+      <p class="prix" id="tarifs">
         <span class="fr">Haute saison <strong>1500 € /semaine </strong></span>
         <span class="en" style="display: none;">High season <strong>1500 €/week</strong></span>
         <p></p>
@@ -89,7 +135,7 @@
 </p>
 
 <h3>
-  <span class="fr">Le logement</span>
+  <span class="fr" id="logement">Le logement</span>
   <span class="en" style="display: none;">The accommodation</span>
 </h3>
 <p>
@@ -199,7 +245,7 @@
 
 
 <main>
-  <section class="gallery">
+  <section class="gallery" id="galerie">
         <!-- Toutes les images doivent avoir la classe lightbox-link -->
 
         <div class="gallery-block">
@@ -353,7 +399,7 @@
 
     </main>
 
-    <footer>
+    <footer id="contact">
       <p>
         <span class="fr">Pour toutes questions ou renseignements supplémentaires : <strong>david.marty@laposte.net</strong> ou <strong>06 11 69 10 21</strong></span>
         <span class="en" style="display: none;">If you have any complementary questions or sugestions, please contact me at : <strong>david.marty@laposte.net</strong> or <strong>06 11 69 10 21</strong></span>
@@ -458,6 +504,41 @@
         img.src = "";
       }
     });
+
+    const toTop = document.getElementById('toTop');
+      window.addEventListener('scroll', () => {
+  toTop.style.display = window.scrollY > 600 ? 'block' : 'none';
+});
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+document.querySelector('.lightbox-close').addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  img.src = "";
+});
+
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].clientX;
+}, { passive: true });
+
+lightbox.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) < 50) return;
+  if (dx < 0) nextBtn.click();
+  else prevBtn.click();
+}, { passive: true });
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+});
+reveals.forEach(el => observer.observe(el));
+
+
+
+
   </script>
 </body>
 </html>
