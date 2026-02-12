@@ -496,3 +496,22 @@ a:focus-visible, button:focus-visible {
 }
 
 
+.lightbox-link .img-mini {
+  width: 320px !important;
+  max-width: 90% !important;
+  height: auto !important;
+  display: block;
+  margin: 12px auto;
+  border-radius: 14px;
+  background-color: #fff4e6; /* couleur principale douce du site */
+  padding: 8px;              /* petit espace autour de l’image */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(201, 78, 78, 0.25);
+  background-color: #ffe1d6;
+
+}
+
+.lightbox-link .img-mini:hover {
+  transform: scale(1.06);
+}
