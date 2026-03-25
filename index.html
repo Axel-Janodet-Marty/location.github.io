@@ -42,6 +42,11 @@
     <span class="en" style="display:none;">Gallery</span>
   </a>
 
+  <a href="#disponibilites">
+    <span class="fr">Disponibilités</span>
+    <span class="en" style="display:none;">Availability</span>
+  </a>
+
   <a href="#contact">
     <span class="fr">Contact</span>
     <span class="en" style="display:none;">Contact</span>
@@ -253,6 +258,37 @@
 </ul>
 
 
+<!-- ===== CALENDRIER DISPONIBILITÉS ===== -->
+<section class="availability-section reveal" id="disponibilites">
+  <h2 class="availability-title">
+    <span class="fr">📅 Disponibilités</span>
+    <span class="en" style="display:none;">📅 Availability</span>
+  </h2>
+
+  <div class="calendar-legend">
+    <span class="legend-item"><span class="legend-dot dot-available"></span>
+      <span class="fr">Disponible</span><span class="en" style="display:none;">Available</span>
+    </span>
+    <span class="legend-item"><span class="legend-dot dot-booked"></span>
+      <span class="fr">Réservé</span><span class="en" style="display:none;">Booked</span>
+    </span>
+    <span class="legend-item"><span class="legend-dot dot-past"></span>
+      <span class="fr">Passé</span><span class="en" style="display:none;">Past</span>
+    </span>
+  </div>
+
+  <div class="calendars-wrapper">
+    <button class="cal-nav-btn" id="cal-prev" aria-label="Mois précédent">&#8249;</button>
+    <div class="calendars-grid" id="calendars-grid"></div>
+    <button class="cal-nav-btn" id="cal-next" aria-label="Mois suivant">&#8250;</button>
+  </div>
+
+  <p class="cal-note">
+    <span class="fr">* Pour toute réservation ou question, contactez-nous directement.</span>
+    <span class="en" style="display:none;">* For any booking or inquiry, contact us directly.</span>
+  </p>
+</section>
+
 <main>
   <section class="gallery" id="galerie">
         <!-- Toutes les images doivent avoir la classe lightbox-link -->
@@ -410,8 +446,8 @@
 
     <footer id="contact">
       <p>
-        <span class="fr">Pour toutes questions ou renseignements supplémentaires : <strong>david.marty@laposte.net</strong> ou <strong>06 11 69 10 21</strong></span>
-        <span class="en" style="display: none;">If you have any complementary questions or sugestions, please contact me at : <strong>david.marty@laposte.net</strong> or <strong>06 11 69 10 21</strong></span>
+        <span class="fr">Pour toutes questions ou renseignements supplémentaires : <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93f7f2e5faf7bdfef2e1e7ead3fff2e3fce0e7f6bdfdf6e7">[email&#160;protected]</a></strong> ou <strong>06 11 69 10 21</strong></span>
+        <span class="en" style="display: none;">If you have any complementary questions or sugestions, please contact me at : <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e98d889f808dc784889b9d90a9858899869a9d8cc7878c9d">[email&#160;protected]</a></strong> or <strong>06 11 69 10 21</strong></span>
       </p>
       <p>
         <span class="fr">Gîte référencé airbnb :  <strong><a href="https://www.airbnb.fr/rooms/1476569417973861294?source_impression_id=p3_1770892111_P3GLExwd4BctLx8h">Voir le gîte</a></strong></span>
@@ -438,7 +474,7 @@
 
   <!-- Début du script JavaScript -->
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const toggleBtn = document.getElementById('lang-toggle');
     let currentLang = 'fr';
 
@@ -451,11 +487,13 @@
         enElements.forEach(el => el.style.display = '');
         toggleBtn.textContent = '🇫🇷 Français';
         currentLang = 'en';
+        document.documentElement.lang = 'en';
       } else {
         frElements.forEach(el => el.style.display = '');
         enElements.forEach(el => el.style.display = 'none');
         toggleBtn.textContent = '🇬🇧 English';
         currentLang = 'fr';
+        document.documentElement.lang = 'fr';
       }
     });
 
@@ -524,12 +562,108 @@
 });
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-document.querySelector('.lightbox-close').addEventListener('click', () => {
-  lightbox.classList.remove('active');
-  img.src = "";
-});
+  // ===================================================
+  // CALENDRIER DISPONIBILITÉS
+  // ===================================================
+  // 📝 POUR MODIFIER LES RÉSERVATIONS :
+  // Ajoutez ou supprimez des plages dans le tableau ci-dessous.
+  // Format : { start: "AAAA-MM-JJ", end: "AAAA-MM-JJ" }
+  // Les deux bornes (start et end) sont INCLUSES.
+  // ===================================================
+  const bookedRanges = [
+    { start: "2025-07-05", end: "2025-07-19" },
+    { start: "2025-08-02", end: "2025-08-16" },
+    { start: "2025-12-20", end: "2026-01-04" },
+    { start: "2026-04-12", end: "2026-04-19" },
+    { start: "2026-07-04", end: "2026-07-18" },
+    { start: "2026-08-01", end: "2026-08-15" },
+  ];
 
-let touchStartX = 0;
+  // Utilitaires
+  function toYMD(d) {
+    return d.toISOString().slice(0, 10);
+  }
+  function isBooked(dateStr) {
+    return bookedRanges.some(r => dateStr >= r.start && dateStr <= r.end);
+  }
+  function isPast(dateStr) {
+    return dateStr < toYMD(new Date());
+  }
+  function isToday(dateStr) {
+    return dateStr === toYMD(new Date());
+  }
+
+  const MONTHS_FR = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+  const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const DAYS_FR   = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+  const DAYS_EN   = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+  let calOffset = 0; // nombre de mois depuis aujourd'hui (0 = mois courant)
+
+  function renderCalendars() {
+    const grid = document.getElementById("calendars-grid");
+    const lang = document.documentElement.lang || 'fr';
+    grid.innerHTML = "";
+
+    for (let m = 0; m < 2; m++) {
+      const now = new Date();
+      const target = new Date(now.getFullYear(), now.getMonth() + calOffset + m, 1);
+      const year  = target.getFullYear();
+      const month = target.getMonth(); // 0-based
+
+      const monthName = (lang === 'en' ? MONTHS_EN : MONTHS_FR)[month];
+      const dayLabels = lang === 'en' ? DAYS_EN : DAYS_FR;
+
+      // Premier jour de la semaine (lundi = 0)
+      let firstDow = target.getDay(); // 0=Sun..6=Sat
+      firstDow = (firstDow === 0) ? 6 : firstDow - 1; // convert to Mon=0
+
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Build HTML
+      let html = `<div class="cal-month">`;
+      html += `<div class="cal-month-title">${monthName} ${year}</div>`;
+      html += `<div class="cal-grid">`;
+      dayLabels.forEach(d => {
+        html += `<div class="cal-cell cal-day-label">${d}</div>`;
+      });
+      // Empty cells before first day
+      for (let i = 0; i < firstDow; i++) {
+        html += `<div class="cal-cell cal-empty"></div>`;
+      }
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        let cls = "cal-cell cal-day";
+        if (isToday(dateStr))   cls += " cal-today";
+        if (isPast(dateStr))    cls += " cal-past";
+        else if (isBooked(dateStr)) cls += " cal-booked";
+        else                    cls += " cal-available";
+        html += `<div class="${cls}">${day}</div>`;
+      }
+      html += `</div></div>`; // cal-grid + cal-month
+      grid.innerHTML += html;
+    }
+
+    // Disable prev if at current month
+    document.getElementById("cal-prev").disabled = (calOffset <= 0);
+  }
+
+  document.getElementById("cal-prev").addEventListener("click", () => {
+    if (calOffset > 0) { calOffset--; renderCalendars(); }
+  });
+  document.getElementById("cal-next").addEventListener("click", () => {
+    calOffset++;
+    renderCalendars();
+  });
+
+  // Re-render on lang toggle to update month/day names
+  toggleBtn.addEventListener('click', () => {
+    setTimeout(renderCalendars, 10);
+  });
+
+  renderCalendars();
+  // ===================================================
+
 lightbox.addEventListener('touchstart', (e) => {
   touchStartX = e.changedTouches[0].clientX;
 }, { passive: true });
@@ -538,20 +672,17 @@ lightbox.addEventListener('touchend', (e) => {
   const dx = e.changedTouches[0].clientX - touchStartX;
   if (Math.abs(dx) < 50) return;
   if (dx < 0) nextBtn.click();
-  else prevBtn.click();
-}, { passive: true });
+}); // <-- Ajoute la parenthèse avant le point-virgule
 
+// Animation d'apparition au défilement pour les éléments .reveal
 const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries => {
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
   });
-});
-reveals.forEach(el => observer.observe(el));
+}, { threshold: 0.15 });
 
-
-
-
+reveals.forEach(reveal => revealObserver.observe(reveal));
   </script>
-</body>
-</html>
