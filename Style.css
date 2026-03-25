@@ -515,3 +515,186 @@ a:focus-visible, button:focus-visible {
 .lightbox-link .img-mini:hover {
   transform: scale(1.06);
 }
+
+
+/* ===================================================
+   CALENDRIER DISPONIBILITÉS
+   =================================================== */
+
+.availability-section {
+  background-color: #fff4e6;
+  padding: 50px 20px 40px;
+  text-align: center;
+}
+
+.availability-title {
+  font-size: 2rem;
+  color: #c94e4e;
+  margin-bottom: 20px;
+}
+
+/* Légende */
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #5a3e36;
+}
+
+.legend-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-available { background: #4caf85; }
+.dot-booked    { background: #e05a5a; }
+.dot-past      { background: #d4c4bb; }
+
+/* Wrapper navigation */
+.calendars-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Boutons prev / next */
+.cal-nav-btn {
+  background: white;
+  border: 2px solid #c94e4e;
+  color: #c94e4e;
+  font-size: 1.8rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  line-height: 1;
+}
+
+.cal-nav-btn:hover:not(:disabled) {
+  background: #c94e4e;
+  color: white;
+  transform: scale(1.08);
+}
+
+.cal-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Grille des 2 mois côte à côte */
+.calendars-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Un mois */
+.cal-month {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+  padding: 20px;
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.cal-month-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #c94e4e;
+  margin-bottom: 14px;
+  text-transform: capitalize;
+}
+
+/* Grille 7 colonnes */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* Entêtes jours */
+.cal-day-label {
+  font-size: 0.72rem;
+  color: #9e7b6e;
+  font-weight: 700;
+  border-radius: 0;
+}
+
+/* Cases vides */
+.cal-empty { background: transparent; }
+
+/* Aujourd'hui */
+.cal-today {
+  outline: 2px solid #c94e4e;
+  outline-offset: 1px;
+}
+
+/* Passé */
+.cal-past {
+  background: #ede8e5;
+  color: #b0a09a;
+}
+
+/* Disponible */
+.cal-available {
+  background: #d4f4e7;
+  color: #27634a;
+}
+.cal-available:hover {
+  background: #4caf85;
+  color: white;
+  transform: scale(1.12);
+  transition: all 0.15s ease;
+}
+
+/* Réservé */
+.cal-booked {
+  background: #fde0e0;
+  color: #b03232;
+}
+
+/* Note bas de calendrier */
+.cal-note {
+  margin-top: 22px;
+  font-size: 0.9rem;
+  color: #9e7b6e;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 680px) {
+  .cal-month { width: 100%; max-width: 320px; }
+  .calendars-grid { gap: 16px; }
+  .cal-nav-btn { width: 36px; height: 36px; font-size: 1.4rem; }
+}
