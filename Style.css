@@ -698,3 +698,23 @@ a:focus-visible, button:focus-visible {
   .calendars-grid { gap: 16px; }
   .cal-nav-btn { width: 36px; height: 36px; font-size: 1.4rem; }
 }
+
+
+/* Retire le style par défaut des liens (bleu et souligné) */
+.badge-airbnb-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: inline-block; /* Important pour que l'ombre et le survol fonctionnent bien */
+}
+
+/* On s'assure que le span à l'intérieur hérite bien du style .badge */
+.badge-airbnb-link .badge {
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Optionnel : Un effet de clic pour que l'utilisateur sente que c'est un bouton */
+.badge-airbnb-link:active .badge {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
