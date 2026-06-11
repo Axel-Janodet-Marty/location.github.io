@@ -44,8 +44,9 @@ body::after {
   overflow: hidden;
 }
 
-/* En-tête */
+/* En-tête — position:relative nécessaire pour #lang-toggle en position absolue */
 header {
+  position: relative;
   background: linear-gradient(135deg, #eecda3, #ef629f);
   color: white;
   text-align: center;
@@ -60,6 +61,107 @@ header h1 {
 header p {
   font-size: 1.2rem;
 }
+
+/* Bouton de changement de langue */
+#lang-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  color: #c94e4e;
+  border: 2px solid #c94e4e;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+#lang-toggle:hover {
+  background-color: #c94e4e;
+  color: #fff;
+}
+
+/* Bascule de langue — géré par classe sur body */
+.en { display: none; }
+body.lang-en .en { display: inline; }
+body.lang-en .fr { display: none; }
+
+/* Navigation rapide sticky */
+.quick-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 10px;
+  background: rgba(255, 244, 230, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201, 78, 78, 0.25);
+}
+
+.quick-nav a {
+  text-decoration: none;
+  color: #8b2f2f;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.quick-nav a:hover {
+  background: #c94e4e;
+  color: white;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .quick-nav {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+  .quick-nav a {
+    white-space: nowrap;
+  }
+}
+
+/* Défilement fluide */
+html { scroll-behavior: smooth; }
+
+.description,
+.gallery,
+footer {
+  scroll-margin-top: 100px;
+}
+
+section + section {
+  margin-top: 40px;
+}
+
+/* Retour en haut */
+#toTop {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: white;
+  color: #c94e4e;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  display: none;
+  z-index: 10001;
+}
+
+#toTop:hover { transform: translateY(-2px); }
 
 /* Description */
 .description {
@@ -86,15 +188,83 @@ header p {
 }
 
 .description .prix {
-  margin-top: 25px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   font-size: 1.3rem;
   font-weight: bold;
   color: #8b2f2f;
   background: #ffe1d6;
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
   padding: 10px 20px;
   border-radius: 25px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.description ul {
+  list-style-position: inside;
+  padding-left: 0;
+  margin-left: 0;
+  text-align: left;
+  max-width: 700px;
+  margin: 0 auto 20px;
+}
+
+.description li {
+  margin-bottom: 6px;
+}
+
+.gallery-block h3,
+.description h3 {
+  font-size: 1.6rem;
+  color: #c94e4e;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+/* Badges infos clés */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 25px auto 10px;
+  max-width: 800px;
+}
+
+.badge {
+  background: #ffe1d6;
+  color: #5a3e36;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 10px 16px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(201, 78, 78, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.badge-airbnb-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: inline-block;
+}
+
+.badge-airbnb-link .badge {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.badge-airbnb-link:active .badge {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Galerie principale */
@@ -106,7 +276,6 @@ header p {
   background-color: #fff4e6;
 }
 
-/* Bloc d'une pièce */
 .gallery-block {
   background-color: #fff;
   border-radius: 16px;
@@ -115,14 +284,6 @@ header p {
   text-align: center;
 }
 
-/* Titre d'une pièce */
-.gallery-block h3 {
-  font-size: 1.6rem;
-  color: #c94e4e;
-  margin-bottom: 20px;
-}
-
-/* Images */
 .gallery-block img {
   width: 90%;
   max-width: 700px;
@@ -138,6 +299,81 @@ header p {
 .gallery-block img:hover {
   transform: scale(1.06);
 }
+
+/* Image mini héro */
+.lightbox-link .img-mini {
+  width: 320px !important;
+  max-width: 90% !important;
+  height: auto !important;
+  display: block;
+  margin: 12px auto;
+  border-radius: 14px;
+  background-color: #ffe1d6;
+  padding: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(201, 78, 78, 0.25);
+}
+
+.lightbox-link .img-mini:hover {
+  transform: scale(1.06);
+}
+
+/* Lightbox (modale image plein écran) */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-overlay.active {
+  display: flex;
+}
+
+.lightbox-overlay::after {
+  content: "✕";
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.lightbox-overlay button {
+  position: absolute;
+  top: 50%;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 20px;
+  transform: translateY(-50%);
+  z-index: 10000;
+  transition: opacity 0.2s ease;
+  background: transparent;
+  border: none;
+  line-height: 1;
+}
+
+#prev { left: 10px; }
+#next { right: 10px; }
+
+.lightbox-overlay button:hover { opacity: 0.7; }
 
 /* Appel à l'action */
 .cta {
@@ -172,350 +408,17 @@ footer {
   border-top: 1px solid #e2c2b3;
 }
 
-/* Responsive pour petits écrans */
-@media (max-width: 480px) {
-  .description,
-  .gallery,
-  .cta {
-    padding: 20px 10px;
-  }
-
-  .airbnb-button {
-    width: 90%;
-    display: inline-block;
-  }
-}
-
-
-/* Lightbox (modale image plein écran) */
-.lightbox-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  display: none;
-}
-
-.lightbox-overlay img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.6);
-}
-
-.lightbox-overlay.active {
-  display: flex;
-}
-
-.lightbox-overlay::after {
-  content: "✕";
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-}
-
-/* Flèches navigation gauche/droite dans la lightbox */
-.lightbox-overlay span {
-  position: absolute;
-  top: 50%;
-  font-size: 3rem;
-  color: white;
-  cursor: pointer;
-  user-select: none;
-  padding: 0 20px;
-  transform: translateY(-50%);
-  z-index: 10000;
-  transition: opacity 0.2s ease;
-}
-
-#prev {
-  left: 10px;
-}
-
-#next {
-  right: 10px;
-}
-
-.lightbox-overlay span:hover {
-  opacity: 0.7;
-}
-
-/* Positionnement du bouton dans le header */
-header {
-  position: relative; /* Permet au bouton d'être positionné par rapport au header */
-  background: linear-gradient(135deg, #eecda3, #ef629f);
-  color: white;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-/* Bouton de changement de langue dans le header */
-#lang-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #ffffff;
-  color: #c94e4e;
-  border: 2px solid #c94e4e;
-  padding: 8px 16px;
-  border-radius: 25px;
-  font-size: 0.95rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  z-index: 1;
-}
-
-#lang-toggle:hover {
-  background-color: #c94e4e;
-  color: #fff;
-}
-
-.description ul {
-  list-style-position: inside;
-  padding-left: 0;
-  margin-left: 0;
-  text-align: left;
-  max-width: 700px;
-  margin: 0 auto 20px;
-}
-
-.description li {
-  margin-bottom: 6px;
-}
-
-/* Titre d'une pièce */
-.gallery-block h3,
-.description h3 {
-  font-size: 1.6rem;
-  color: #c94e4e;
-  margin-bottom: 20px; /* espace après le titre */
-  margin-top: 30px;     /* espace avant le titre */
-}
-
-
-/* Navigation rapide */
-.quick-nav{
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  padding: 10px;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-.quick-nav a{
-  text-decoration: none;
-  color: #8b2f2f;
-  font-weight: 700;
-  padding: 8px 12px;
-  border-radius: 999px;
-}
-
-.quick-nav a:hover{
-  background: #ffe1d6;
-}
-
-
-html { scroll-behavior: smooth; }
-
-#toTop{
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  border: 0;
-  padding: 10px 12px;
-  border-radius: 999px;
-  background: white;
-  color: #c94e4e;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  cursor: pointer;
-  display: none;
-  z-index: 10001;
-}
-#toTop:hover{ transform: translateY(-2px); }
-
-
-.lightbox-close{
-  position: absolute;
-  top: 16px;
-  right: 18px;
-  background: transparent;
-  border: 0;
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-
-
-.badges{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin: 18px 0 6px;
-}
-
-.badge{
-  background: rgba(255,255,255,0.75);
-  border: 1px solid rgba(0,0,0,0.06);
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-weight: 700;
-  color: #5a3e36;
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; scroll-behavior: auto !important; }
-}
-
-
-a:focus-visible, button:focus-visible{
-  outline: 3px solid rgba(201,78,78,0.55);
-  outline-offset: 3px;
-  border-radius: 12px;
-}
-
-
-/* Badges infos clés */
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin: 25px auto 10px;
-  max-width: 800px;
-}
-
-.badge {
-  background: #ffe1d6;              /* même base que .prix */
-  color: #5a3e36;
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 10px 16px;
-  border-radius: 999px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(201, 78, 78, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.badge:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-}
-
-
-/* Navigation rapide sticky */
-.quick-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  padding: 12px 10px;
-  background: rgba(255, 244, 230, 0.85);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(201, 78, 78, 0.25);
-}
-
-/* Liens */
-.quick-nav a {
-  text-decoration: none;
-  color: #8b2f2f;
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: all 0.25s ease;
-}
-
-/* Hover */
-.quick-nav a:hover {
-  background: #c94e4e;
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* Responsive mobile */
-@media (max-width: 480px) {
-  .quick-nav {
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
-
-  .quick-nav a {
-    white-space: nowrap;
-  }
-}
-
-.description,
-.gallery,
-footer {
-  scroll-margin-top: 100px;
-}
-section + section {
-  margin-top: 40px;
-}
-
+/* Animation révélation au défilement */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
 .reveal.visible {
   opacity: 1;
   transform: none;
 }
-
-a:focus-visible, button:focus-visible {
-  outline: 3px solid #c94e4e;
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; }
-}
-
-
-.lightbox-link .img-mini {
-  width: 320px !important;
-  max-width: 90% !important;
-  height: auto !important;
-  display: block;
-  margin: 12px auto;
-  border-radius: 14px;
-  background-color: #fff4e6; /* couleur principale douce du site */
-  padding: 8px;              /* petit espace autour de l’image */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
-  border: 1px solid rgba(201, 78, 78, 0.25);
-  background-color: #ffe1d6;
-
-}
-
-.lightbox-link .img-mini:hover {
-  transform: scale(1.06);
-}
-
 
 /* ===================================================
    CALENDRIER DISPONIBILITÉS
@@ -533,7 +436,6 @@ a:focus-visible, button:focus-visible {
   margin-bottom: 20px;
 }
 
-/* Légende */
 .calendar-legend {
   display: flex;
   justify-content: center;
@@ -562,7 +464,6 @@ a:focus-visible, button:focus-visible {
 .dot-booked    { background: #e05a5a; }
 .dot-past      { background: #d4c4bb; }
 
-/* Wrapper navigation */
 .calendars-wrapper {
   display: flex;
   align-items: center;
@@ -570,7 +471,6 @@ a:focus-visible, button:focus-visible {
   gap: 12px;
 }
 
-/* Boutons prev / next */
 .cal-nav-btn {
   background: white;
   border: 2px solid #c94e4e;
@@ -585,7 +485,7 @@ a:focus-visible, button:focus-visible {
   justify-content: center;
   flex-shrink: 0;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   line-height: 1;
 }
 
@@ -600,7 +500,6 @@ a:focus-visible, button:focus-visible {
   cursor: default;
 }
 
-/* Grille des 2 mois côte à côte */
 .calendars-grid {
   display: flex;
   gap: 24px;
@@ -608,11 +507,10 @@ a:focus-visible, button:focus-visible {
   justify-content: center;
 }
 
-/* Un mois */
 .cal-month {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
   padding: 20px;
   width: 300px;
   flex-shrink: 0;
@@ -626,7 +524,6 @@ a:focus-visible, button:focus-visible {
   text-transform: capitalize;
 }
 
-/* Grille 7 colonnes */
 .cal-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -643,7 +540,6 @@ a:focus-visible, button:focus-visible {
   font-weight: 600;
 }
 
-/* Entêtes jours */
 .cal-day-label {
   font-size: 0.72rem;
   color: #9e7b6e;
@@ -651,26 +547,23 @@ a:focus-visible, button:focus-visible {
   border-radius: 0;
 }
 
-/* Cases vides */
 .cal-empty { background: transparent; }
 
-/* Aujourd'hui */
 .cal-today {
   outline: 2px solid #c94e4e;
   outline-offset: 1px;
 }
 
-/* Passé */
 .cal-past {
   background: #ede8e5;
   color: #b0a09a;
 }
 
-/* Disponible */
 .cal-available {
   background: #d4f4e7;
   color: #27634a;
 }
+
 .cal-available:hover {
   background: #4caf85;
   color: white;
@@ -678,13 +571,11 @@ a:focus-visible, button:focus-visible {
   transition: all 0.15s ease;
 }
 
-/* Réservé */
 .cal-booked {
   background: #fde0e0;
   color: #b03232;
 }
 
-/* Note bas de calendrier */
 .cal-note {
   margin-top: 22px;
   font-size: 0.9rem;
@@ -692,29 +583,64 @@ a:focus-visible, button:focus-visible {
   font-style: italic;
 }
 
-/* Responsive */
 @media (max-width: 680px) {
   .cal-month { width: 100%; max-width: 320px; }
   .calendars-grid { gap: 16px; }
   .cal-nav-btn { width: 36px; height: 36px; font-size: 1.4rem; }
 }
 
+/* ===================================================
+   SECTION CARTE
+   =================================================== */
 
-/* Retire le style par défaut des liens (bleu et souligné) */
-.badge-airbnb-link {
-    text-decoration: none !important;
-    color: inherit !important;
-    display: inline-block; /* Important pour que l'ombre et le survol fonctionnent bien */
+.map-section {
+  background-color: #fff4e6;
+  padding: 50px 30px 40px;
+  text-align: center;
 }
 
-/* On s'assure que le span à l'intérieur hérite bien du style .badge */
-.badge-airbnb-link .badge {
+.map-section h2 {
+  font-size: 2rem;
+  color: #c94e4e;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.map-section > p {
+  font-size: 1rem;
+  color: #5a3e36;
+  margin-bottom: 24px;
+}
+
+.map-container {
+  max-width: 860px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Accessibilité */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #c94e4e;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .description,
+  .gallery,
+  .cta {
+    padding: 20px 10px;
+  }
+  .airbnb-button {
+    width: 90%;
     display: inline-block;
-    cursor: pointer;
-}
-
-/* Optionnel : Un effet de clic pour que l'utilisateur sente que c'est un bouton */
-.badge-airbnb-link:active .badge {
-    transform: scale(0.95);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 }
