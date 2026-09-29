@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <!-- Sécurité : politique de contenu et de référent -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Gîte du Coteau à Asnières sous Bois 89</title>
   <meta name="description" content="Gîte du Coteau à Asnières-sous-Bois (89) — Grande maison familiale 12 couchages, piscine, jardin, Wi-Fi fibre. À 10 km de Vézelay.">
@@ -44,10 +44,8 @@
   </script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E🏡%3C/text%3E%3C/svg%3E">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preload" href="fonts/raleway-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="Style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 
@@ -502,16 +500,22 @@
         <span class="fr">Asnières-sous-Bois, 89660 (Yonne) — À 10 km de Vézelay, 2h15 de Paris par l'A6</span>
         <span class="en">Asnières-sous-Bois, 89660 (Yonne) — 10 km from Vézelay, 2h15 from Paris via A6</span>
       </p>
-      <div class="map-container">
-        <iframe
-          src="https://maps.google.com/maps?q=Asni%C3%A8res-sous-Bois%2C+89660%2C+France&t=m&z=14&ie=UTF8&iwloc=&output=embed"
-          width="100%"
-          height="380"
-          loading="lazy"
-          title="Carte Asnières-sous-Bois"
-
-          allowfullscreen>
-        </iframe>
+      <div class="map-container" id="map-container">
+        <div class="map-placeholder">
+          <p class="map-placeholder-address">Asnières-sous-Bois, 89660 (Yonne)</p>
+          <button type="button" id="map-load" class="map-load-btn">
+            <span class="fr">🗺️ Afficher la carte</span>
+            <span class="en">🗺️ Show the map</span>
+          </button>
+          <p class="map-placeholder-note">
+            <span class="fr">La carte est fournie par Google Maps. En l'affichant, vous acceptez que Google reçoive votre adresse IP et puisse déposer des cookies.</span>
+            <span class="en">The map is provided by Google Maps. By showing it, you agree that Google receives your IP address and may set cookies.</span>
+          </p>
+          <a class="map-external-link" href="https://www.google.com/maps/search/?api=1&amp;query=Asni%C3%A8res-sous-Bois%2C+89660" target="_blank" rel="noopener noreferrer">
+            <span class="fr">Ou ouvrir directement dans Google Maps</span>
+            <span class="en">Or open directly in Google Maps</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -521,8 +525,8 @@
         <span class="en">For any questions, please contact us at: <strong><a href="mailto:david.marty@laposte.net">david.marty@laposte.net</a></strong> or <strong>06 11 69 10 21</strong></span>
       </p>
       <p>
-        <span class="fr">Gîte référencé airbnb :  <strong><a href="https://www.airbnb.fr/rooms/1476569417973861294?source_impression_id=p3_1770892111_P3GLExwd4BctLx8h">Voir le gîte</a></strong></span>
-        <span class="en">Listing on Airbnb: <strong><a href="https://www.airbnb.fr/rooms/1476569417973861294?source_impression_id=p3_1770892111_P3GLExwd4BctLx8h">See the cottage</a></strong></span>
+        <span class="fr">Gîte référencé airbnb :  <strong><a href="https://www.airbnb.fr/rooms/1476569417973861294">Voir le gîte</a></strong></span>
+        <span class="en">Listing on Airbnb: <strong><a href="https://www.airbnb.fr/rooms/1476569417973861294">See the cottage</a></strong></span>
       </p>
       <p>
         <span class="fr">&copy; 2025 Mon logement – Merci de votre visite ❤️</span>
