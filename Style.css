@@ -620,6 +620,12 @@ footer {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
+.map-container iframe {
+  display: block;
+  border: 0;
+  border-radius: 12px;
+}
+
 /* Accessibilité */
 a:focus-visible,
 button:focus-visible {
