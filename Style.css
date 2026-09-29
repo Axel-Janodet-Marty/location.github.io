@@ -1,3 +1,20 @@
+/* Police Raleway hébergée localement (licence SIL OFL, voir fonts/OFL.txt) */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/raleway-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/raleway-700.woff2") format("woff2");
+}
+
 /* Reset */
 * {
   margin: 0;
@@ -624,6 +641,65 @@ footer {
   display: block;
   border: 0;
   border-radius: 12px;
+}
+
+/* Espace réservé de la carte (avant consentement) */
+.map-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 380px;
+  padding: 30px 20px;
+  background-color: #eef3ea;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240' fill='none'%3E%3Cpath d='M-10 70 C 60 40, 110 110, 250 60' stroke='%23ffffff' stroke-width='10'/%3E%3Cpath d='M40 -10 C 70 80, 20 150, 90 250' stroke='%23ffffff' stroke-width='6'/%3E%3Cpath d='M-10 190 C 80 170, 150 220, 250 170' stroke='%23d9e6d3' stroke-width='14'/%3E%3Cpath d='M170 -10 C 150 70, 200 130, 160 250' stroke='%23ffffff' stroke-width='4'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.map-placeholder-address {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #5a3e36;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.map-load-btn {
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: white;
+  background-color: #c94e4e;
+  border: 0;
+  padding: 12px 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+  transition: background 0.25s ease;
+}
+
+.map-load-btn:hover {
+  background-color: #a83b3b;
+}
+
+.map-placeholder-note {
+  max-width: 480px;
+  font-size: 0.85rem;
+  color: #5a3e36;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+
+.map-external-link {
+  font-size: 0.9rem;
+  color: #8b2f2f;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 4px 12px;
+  border-radius: 999px;
 }
 
 /* Accessibilité */
