@@ -100,9 +100,23 @@ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoot
     { start: "2026-08-01", end: "2026-08-15" },
   ];
 
-  fetch('reservations.json')
-    .then(r => r.json())
-    .then(data => { bookedRanges = data; renderCalendars(); })
+  // Ne garde que les plages au format attendu (AAAA-MM-JJ) : un fichier mal
+  // formé ou modifié ne peut ni casser le calendrier ni y injecter du contenu.
+  const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+  function sanitizeRanges(data) {
+    if (!Array.isArray(data)) return null;
+    return data.filter(r =>
+      r && typeof r.start === 'string' && typeof r.end === 'string' &&
+      DATE_RE.test(r.start) && DATE_RE.test(r.end)
+    );
+  }
+
+  fetch('reservations.json', { cache: 'no-cache' })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      const clean = sanitizeRanges(data);
+      if (clean) { bookedRanges = clean; renderCalendars(); }
+    })
     .catch(() => {});
 
   // Utilitaires
@@ -126,10 +140,18 @@ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoot
 
   let calOffset = 0; // nombre de mois depuis aujourd'hui (0 = mois courant)
 
+  // Crée un élément avec une classe et un texte (textContent : jamais interprété comme du HTML)
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
   function renderCalendars() {
     const grid = document.getElementById("calendars-grid");
     const lang = document.documentElement.lang || 'fr';
-    grid.innerHTML = "";
+    const fragment = document.createDocumentFragment();
 
     for (let m = 0; m < 2; m++) {
       const now = new Date();
@@ -146,17 +168,17 @@ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoot
 
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      // Build HTML
-      let html = `<div class="cal-month">`;
-      html += `<div class="cal-month-title">${monthName} ${year}</div>`;
-      html += `<div class="cal-grid">`;
-      dayLabels.forEach(d => {
-        html += `<div class="cal-cell cal-day-label">${d}</div>`;
-      });
-      // Empty cells before first day
+      const monthEl = el('div', 'cal-month');
+      monthEl.appendChild(el('div', 'cal-month-title', `${monthName} ${year}`));
+
+      const calGrid = el('div', 'cal-grid');
+      dayLabels.forEach(d => calGrid.appendChild(el('div', 'cal-cell cal-day-label', d)));
+
+      // Cases vides avant le premier jour
       for (let i = 0; i < firstDow; i++) {
-        html += `<div class="cal-cell cal-empty"></div>`;
+        calGrid.appendChild(el('div', 'cal-cell cal-empty'));
       }
+
       for (let day = 1; day <= daysInMonth; day++) {
         const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
         let cls = "cal-cell cal-day";
@@ -164,13 +186,16 @@ toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smoot
         if (isPast(dateStr))    cls += " cal-past";
         else if (isBooked(dateStr)) cls += " cal-booked";
         else                    cls += " cal-available";
-        html += `<div class="${cls}">${day}</div>`;
+        calGrid.appendChild(el('div', cls, String(day)));
       }
-      html += `</div></div>`; // cal-grid + cal-month
-      grid.innerHTML += html;
+
+      monthEl.appendChild(calGrid);
+      fragment.appendChild(monthEl);
     }
 
-    // Disable prev if at current month
+    grid.replaceChildren(fragment);
+
+    // Désactive "mois précédent" sur le mois courant
     document.getElementById("cal-prev").disabled = (calOffset <= 0);
   }
 
@@ -215,3 +240,24 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 reveals.forEach(reveal => revealObserver.observe(reveal));
+
+// ===================================================
+// CARTE GOOGLE MAPS — chargée seulement après un clic (RGPD)
+// ===================================================
+const MAP_URL = "https://maps.google.com/maps?q=Asni%C3%A8res-sous-Bois%2C+89660%2C+France&t=m&z=14&ie=UTF8&iwloc=&output=embed";
+const mapLoadBtn = document.getElementById('map-load');
+
+if (mapLoadBtn) {
+  mapLoadBtn.addEventListener('click', () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = MAP_URL;
+    iframe.title = 'Carte Asnières-sous-Bois';
+    iframe.width = '100%';
+    iframe.height = '380';
+    iframe.allowFullscreen = true;
+    // Isolation : la carte peut fonctionner et ouvrir Google Maps dans un nouvel onglet,
+    // mais ne peut ni rediriger votre page, ni ouvrir de formulaire, ni télécharger.
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+    document.getElementById('map-container').replaceChildren(iframe);
+  });
+}
